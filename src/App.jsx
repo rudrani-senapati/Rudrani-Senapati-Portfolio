@@ -9,10 +9,13 @@ import Footer from './components/Footer';
 
 // A separate component to wrap App and provide the Router context
 const AppContent = () => {
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('theme') || 'light';
-    });
-
+    const [theme, setTheme] = useState('light');
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+    }, []);
     useEffect(() => {
         const root = document.documentElement;
         if (theme === 'dark') {
