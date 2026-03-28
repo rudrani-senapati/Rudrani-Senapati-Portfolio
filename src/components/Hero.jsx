@@ -58,7 +58,7 @@ const Hero = () => {
 
           <div className="mt-10 flex justify-center md:justify-start space-x-6">
             <a
-              href="https://github.com/0rudrani0"
+              href="https://github.com/rudrani-senapati"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-teal-400 transition-colors text-3xl dark:text-gray-700 dark:hover:text-teal-500"

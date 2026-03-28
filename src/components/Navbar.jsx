@@ -25,7 +25,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         { label: 'Projects', path: '/projects' },
         { label: 'Contact', path: '/contact' },
     ];
-    
+
     const resumePath = '/Rudrani_Resume.pdf';
 
     return (
@@ -40,37 +40,40 @@ const Navbar = ({ theme, toggleTheme }) => {
                         <NavLink
                             key={link.label}
                             to={link.path}
-                            className={({ isActive }) => 
-                                `relative transition-colors ${
-                                    isActive
-                                        ? 'text-teal-400 dark:text-teal-500'
-                                        : 'text-gray-300 dark:text-gray-700 '
+                            className={({ isActive }) =>
+                                `relative transition-colors ${isActive
+                                    ? 'text-teal-400 dark:text-teal-500'
+                                    : 'text-gray-300 dark:text-gray-700'
                                 }`
                             }
                         >
-                            {link.label}
-                            {({ isActive }) => isActive && (
-                                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-teal-400 rounded-full dark:bg-teal-500"></span>
+                            {({ isActive }) => (
+                                <>
+                                    {link.label}
+                                    {isActive && (
+                                        <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-teal-400 rounded-full dark:bg-teal-500"></span>
+                                    )}
+                                </>
                             )}
                         </NavLink>
                     ))}
-                    
+
                     <a
-                        href={resumePath}
-                        download="Rudrani_Resume"
+                        href="/Rudrani_Senapati.pdf"
+                        download
                         className="bg-purple-600 text-white hover:bg-purple-700 py-2 px-6 rounded-full font-bold shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
                     >
                         Resume
                     </a>
-                    
-                    
+
+
                     <button
                         onClick={toggleTheme}
                         className="ml-4 p-2 rounded-full bg-gray-600 hover:bg-gray-600 text-white transition-colors dark:bg-gray-500 dark:hover:bg-gray-500"
                         aria-label="Toggle Theme"
                     >
                         <AnimatePresence mode="wait">
-                            {theme === 'light' ?  (
+                            {theme === 'light' ? (
                                 <motion.div
                                     key="moon"
                                     initial={{ opacity: 0, rotate: -90 }}
@@ -78,9 +81,9 @@ const Navbar = ({ theme, toggleTheme }) => {
                                     exit={{ opacity: 0, rotate: 90 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <FaMoon className="text-white" />
+                                    <FaSun className="text-white" />
                                 </motion.div>
-                            ):(
+                            ) : (
                                 <motion.div
                                     key="sun"
                                     initial={{ opacity: 0, rotate: 90 }}
@@ -88,9 +91,9 @@ const Navbar = ({ theme, toggleTheme }) => {
                                     exit={{ opacity: 0, rotate: -90 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <FaSun className="text-yellow-400" />
+                                    <FaMoon className="text-yellow-400" />
                                 </motion.div>
-                            ) }
+                            )}
                         </AnimatePresence>
                     </button>
                 </div>
@@ -143,18 +146,17 @@ const Navbar = ({ theme, toggleTheme }) => {
                             key={link.label}
                             to={link.path}
                             onClick={() => setIsOpen(false)}
-                            className={({ isActive }) => 
-                                `block w-full text-center py-2 transition-colors ${
-                                    isActive
-                                        ? 'text-teal-400 dark:text-teal-500'
-                                        : 'text-gray-300 hover:text-teal-400 dark:text-gray-700 dark:hover:text-teal-500'
+                            className={({ isActive }) =>
+                                `block w-full text-center py-2 transition-colors ${isActive
+                                    ? 'text-teal-400 dark:text-teal-500'
+                                    : 'text-gray-300 hover:text-teal-400 dark:text-gray-700 dark:hover:text-teal-500'
                                 }`
                             }
                         >
                             {link.label}
                         </NavLink>
                     ))}
-                    
+
                     <a
                         href={resumePath}
                         download="Rudrani_Resume"
@@ -163,7 +165,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                     >
                         Resume
                     </a>
-                    
+
                     <Link
                         to="/contact"
                         onClick={() => setIsOpen(false)}

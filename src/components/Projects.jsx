@@ -81,22 +81,21 @@ const Projects = () => {
               key={index}
               className="group relative p-1 bg-gradient-to-tr from-teal-400 via-purple-500 to-pink-500 rounded-xl transform hover:scale-105 transition-transform duration-300 animate-fade-in-up shadow-lg"
             >
-              <div className="bg-gray-900 rounded-xl overflow-hidden flex flex-col h-full shadow-inner">
+              <div className="bg-gray-900 dark:bg-gradient-to-br dark:from-teal-50 dark:via-purple-50 dark:to-pink-50 rounded-xl overflow-hidden flex flex-col h-full shadow-inner hover:shadow-xl hover:shadow-teal-300/30 transition ">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-56 object-fit transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-                  <p className="mt-2 text-gray-400 flex-grow">{project.description}</p>
+                  <h3 className="text-2xl font-semibold text-white dark:text-gray-900">{project.title}</h3>
+                  <p className="mt-2 text-gray-400 flex-grow dark:text-gray-700">{project.description}</p>
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-gray-800 text-teal-400 text-sm px-3 py-1 rounded-full font-medium"
-                      >
+                        className="bg-gradient-to-r from-slate-900 via-teal-900 to-purple-900 text-teal-300 text-sm px-3 py-1 rounded-full font-medium shadow-md hover:scale-105 transition dark:bg-gradient-to-r dark:from-teal-100 dark:via-purple-100 dark:to-pink-100 dark:text-gray-800">
                         {tech}
                       </span>
                     ))}

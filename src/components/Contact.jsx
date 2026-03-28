@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import emailjs from "emailjs-com";
+
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -12,33 +14,30 @@ const Contact = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setStatus('loading');
-        try {
-            const response = await fetch('http://localhost:5000/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
+        emailjs.send(
+            "service_z84ew0g",
+            "template_sz43peu",
+            {
+                from_name: formData.name,
+                from_email: formData.email,
+                message: formData.message,
+            },
+            "JtP2DIUmjndZapw2Z"
+        ).then(
+            () => {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
-
-                // Auto-hide message after 5 seconds
                 setTimeout(() => setStatus(null), 5000);
-            } else {
+            },
+            () => {
                 setStatus('error');
                 setTimeout(() => setStatus(null), 5000);
             }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            setStatus('error');
-            setTimeout(() => setStatus(null), 5000);
-        }
+        );
     };
 
     return (
@@ -48,13 +47,15 @@ const Contact = () => {
                     Get In Touch
                 </h2>
                 <div className="max-w-xl mx-auto p-1 bg-gradient-to-tr from-teal-400 via-purple-500 to-pink-500 rounded-lg shadow-lg animate-fade-in-up">
-                    <div className="bg-gray-950 p-8 rounded-lg">
-                        <p className="text-center mb-6 text-gray-400">
+                    <div className="bg-gradient-to-br from-slate-900 via-teal-900 to-purple-900 
+dark:bg-gradient-to-br dark:from-teal-200 dark:via-purple-300 dark:to-pink-300 font-semibold
+p-8 rounded-lg">
+                        <p className="text-center mb-6 text-gray-400 dark:text-blue-900 ">
                             Have a question or want to work together? Fill out the form below.
                         </p>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
-                                <label htmlFor="name" className="block text-gray-400 font-bold mb-2">Name</label>
+                                <label htmlFor="name" className="block text-gray-400 font-bold mb-2 dark:text-blue-900">Name</label>
                                 <input
                                     type="text"
                                     id="name"
@@ -62,11 +63,11 @@ const Contact = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 text-gray-300 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                    className="w-full px-3 py-2 dark:bg-gradient-to-r dark:from-teal-100 dark:via-purple-100 dark:to-pink-100 dark:text-gray-800 bg-gradient-to-r from-slate-700 via-teal-700 to-purple-700 text-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
                                 />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="email" className="block text-gray-400 font-bold mb-2">Email</label>
+                                <label htmlFor="email" className="block text-gray-400 font-bold mb-2 dark:text-blue-900">Email</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -74,11 +75,11 @@ const Contact = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 text-gray-300 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                    className="w-full px-3 py-2 dark:bg-gradient-to-r dark:from-teal-100 dark:via-purple-100 dark:to-pink-100 dark:text-gray-800 bg-gradient-to-r from-slate-700 via-teal-700 to-purple-700 text-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
                                 />
                             </div>
                             <div className="mb-6">
-                                <label htmlFor="message" className="block text-gray-400 font-bold mb-2">Message</label>
+                                <label htmlFor="message" className="block text-gray-400 font-bold mb-2 dark:text-blue-900">Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
@@ -86,7 +87,7 @@ const Contact = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 text-gray-300 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                    className="w-full px-3 py-2 dark:bg-gradient-to-r dark:from-teal-100 dark:via-purple-100 dark:to-pink-100 dark:text-gray-800 bg-gradient-to-r from-slate-700 via-teal-700 to-purple-700 text-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
                                 ></textarea>
                             </div>
                             <button
