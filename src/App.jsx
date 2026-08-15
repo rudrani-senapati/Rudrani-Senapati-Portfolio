@@ -9,14 +9,10 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-    const [theme, setTheme] = useState('dark');
-
-    useEffect(() => {
+    const [theme, setTheme] = useState(() => {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        }
-    }, []);
+        return savedTheme ? savedTheme : 'dark';
+    });
 
     useEffect(() => {
         const root = document.documentElement;
@@ -29,6 +25,7 @@ function App() {
         }
         localStorage.setItem('theme', theme);
     }, [theme]);
+
 
     const toggleTheme = () => {
         setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
