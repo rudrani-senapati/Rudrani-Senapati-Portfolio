@@ -118,8 +118,11 @@ const Hero = () => {
                     <img
                       src={profileImage}
                       alt="Rudrani Senapati"
+                      fetchPriority="high"
+                      decoding="async"
                       className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
                     />
+
                     {/* Subtle Vignette Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-50 group-hover:opacity-20 transition-opacity"></div>
                   </div>
