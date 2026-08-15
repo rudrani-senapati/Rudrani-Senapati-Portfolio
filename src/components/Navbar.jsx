@@ -142,19 +142,30 @@ const Navbar = ({ theme, toggleTheme }) => {
                         </button>
                     </div>
 
-                    {/* Mobile menu buttons */}
-                    <div className="md:hidden flex items-center space-x-3">
+                    {/* Mobile Menu Action Buttons */}
+                    <div className="md:hidden flex items-center space-x-2.5">
                         <button
                             onClick={toggleTheme}
-                            className="p-2 rounded-full bg-slate-800 text-slate-200 dark:bg-slate-200 dark:text-slate-800"
+                            className="flex items-center gap-1.5 p-2 px-3 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 dark:bg-slate-200 dark:text-slate-800 dark:border-slate-300 text-xs font-semibold shadow-sm transition-all"
                             aria-label="Toggle Theme"
                         >
-                            {theme === 'light' ? <FaSun className="text-amber-400" /> : <FaMoon className="text-indigo-400" />}
+                            {theme === 'light' ? (
+                                <>
+                                    <FaSun className="text-amber-400 text-sm" />
+                                    <span className="text-[11px]">Light</span>
+                                </>
+                            ) : (
+                                <>
+                                    <FaMoon className="text-indigo-400 text-sm" />
+                                    <span className="text-[11px]">Dark</span>
+                                </>
+                            )}
                         </button>
+                        
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="p-2 text-slate-200 hover:text-teal-400 text-2xl focus:outline-none dark:text-slate-800"
-                            aria-label="Toggle Menu"
+                            aria-label="Toggle Navigation Menu"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
@@ -168,14 +179,14 @@ const Navbar = ({ theme, toggleTheme }) => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 px-6 py-6 dark:bg-white/95 dark:border-slate-200 shadow-2xl"
+                            className="md:hidden bg-slate-950/95 backdrop-blur-2xl border-b border-slate-800/80 px-6 py-6 dark:bg-white/95 dark:border-slate-200 shadow-2xl"
                         >
                             <div className="flex flex-col space-y-4 text-center font-medium">
                                 {navLinks.map((link) => (
                                     <button
                                         key={link.target}
                                         onClick={() => scrollTo(link.target)}
-                                        className={`py-2 text-lg transition-colors ${
+                                        className={`py-2 text-base transition-colors ${
                                             activeSection === link.target
                                                 ? 'text-teal-400 font-bold dark:text-teal-600'
                                                 : 'text-slate-300 dark:text-slate-700'
@@ -185,20 +196,40 @@ const Navbar = ({ theme, toggleTheme }) => {
                                     </button>
                                 ))}
 
-                                <button
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        setIsResumeOpen(true);
-                                    }}
-                                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 font-bold py-3 px-6 rounded-full shadow-lg"
-                                >
-                                    <FaFilePdf />
-                                    <span>Preview Resume</span>
-                                </button>
+                                <div className="pt-2 flex flex-col gap-3">
+                                    <button
+                                        onClick={toggleTheme}
+                                        className="flex items-center justify-center gap-2 bg-slate-900 border border-slate-800 dark:bg-slate-100 dark:border-slate-300 text-slate-200 dark:text-slate-800 font-semibold py-2.5 px-5 rounded-full text-sm"
+                                    >
+                                        {theme === 'light' ? (
+                                            <>
+                                                <FaSun className="text-amber-400" />
+                                                <span>Switch to Dark Theme</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaMoon className="text-indigo-400" />
+                                                <span>Switch to Light Theme</span>
+                                            </>
+                                        )}
+                                    </button>
+
+                                    <button
+                                        onClick={() => {
+                                            setIsOpen(false);
+                                            setIsResumeOpen(true);
+                                        }}
+                                        className="flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 font-bold py-3 px-6 rounded-full shadow-lg text-sm"
+                                    >
+                                        <FaFilePdf />
+                                        <span>Preview Resume</span>
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
+
             </nav>
 
             <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
